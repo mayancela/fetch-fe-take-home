@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import DialogActions from "@mui/material/DialogActions";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
+import { useRouter } from "next/navigation";
 
 const LoginFormDialog = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -19,6 +20,7 @@ const LoginFormDialog = () => {
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { push } = useRouter();
 
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
@@ -28,8 +30,7 @@ const LoginFormDialog = () => {
 
     try {
       const res = await userAuth(name, email);
-      console.log("res ", res);
-      // to-do: add routing to /search
+      if (res.success) push("/search");
     } catch (error) {
       setErrorMessage("Authentication failed. Please try again."); // to-do: update error handling?
       console.error("Authentication error:", error);
