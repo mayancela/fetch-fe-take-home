@@ -24,6 +24,7 @@ const useUserAuth = () => {
       }
 
       setIsAuthenticated(true);
+      setError(false);
     } catch {
       setError(true);
     } finally {
@@ -45,6 +46,7 @@ const useUserAuth = () => {
       }
 
       setIsAuthenticated(false);
+      setError(false);
     } catch {
       setError(true);
     } finally {
