@@ -1,46 +1,45 @@
 "use client";
 
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
-import userAuth from "../utils/userAuth";
 import Typography from "@mui/material/Typography";
 import DialogActions from "@mui/material/DialogActions";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/navigation";
+import useUserAuth from "../utils/useUserAuth";
 
 const LoginFormDialog = () => {
   const [openModal, setOpenModal] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const { push } = useRouter();
+  const { loginUser, isLoading, isAuthenticated, error } = useUserAuth();
 
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
 
-    try {
-      const res = await userAuth(name, email);
-      if (res.success) push("/search");
-    } catch (error) {
-      setErrorMessage("Authentication failed. Please try again."); // to-do: update error handling?
-      console.error("Authentication error:", error);
-    } finally {
-      setIsLoading(false);
-    }
+    await loginUser(name, email);
 
     setName("");
     setEmail("");
   };
+
+  useEffect(() => {
+    if (isAuthenticated && !error) {
+      handleClose();
+      push("/search");
+    } else if (error)
+      setErrorMessage("Authentication failed. Please try again.");
+  }, [isAuthenticated, error, push]);
 
   return (
     <Container>
