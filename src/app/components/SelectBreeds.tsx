@@ -7,6 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
+import Button from "@mui/material/Button";
 
 // to-do: update generic styling
 const ITEM_HEIGHT = 48;
@@ -53,6 +54,10 @@ const SelectBreeds = ({
     onBreedSelect(selectedBreeds);
   };
 
+  const handleBreedReset = () => {
+    onBreedSelect([]);
+  };
+
   return (
     <Box>
       <FormControl sx={{ m: 1, width: 300 }}>
@@ -85,6 +90,13 @@ const SelectBreeds = ({
             </MenuItem>
           ))}
         </Select>
+        <Button
+          variant="outlined"
+          onClick={handleBreedReset}
+          disabled={!selectedBreeds.length}
+        >
+          Reset
+        </Button>
       </FormControl>
     </Box>
   );
