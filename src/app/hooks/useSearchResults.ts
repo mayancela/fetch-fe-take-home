@@ -13,12 +13,16 @@ const fetcher = async (path: string) => {
 };
 
 const useSearchResults = (
+  currentPage: number,
+  resultsSize: number,
   ageGroup: AgeGroup,
   selectedBreeds?: string[],
   breedSort: SortDirection = "asc"
 ) => {
   const params = new URLSearchParams();
   const ageValues = getAgeGroup(ageGroup);
+
+  params.append("from", ((currentPage - 1) * resultsSize).toString());
 
   if (ageValues) {
     params.append("ageMin", ageValues.ageMin.toString());
@@ -29,15 +33,15 @@ const useSearchResults = (
     selectedBreeds.map((breed) => params.append("breeds", breed));
 
   const {
-    data: dogIds,
-    error: dogIdsError,
-    isLoading: dogIdsIsLoading,
+    data: dogIdsData,
+    error: dogIdsDataError,
+    isLoading: dogIdsDataIsLoading,
   } = useSWR(
-    `/dogs/search?sort=breed:${breedSort}&${params.toString()}`,
+    `/dogs/search?size=${resultsSize}&sort=breed:${breedSort}&${params.toString()}`,
     fetcher
   );
 
-  const resultIds = dogIds?.resultIds ?? [];
+  const resultIds = dogIdsData?.resultIds ?? [];
 
   const { data, error, isLoading } = useDogDetails(resultIds);
 
@@ -45,9 +49,9 @@ const useSearchResults = (
     data,
     error,
     isLoading,
-    dogIds,
-    dogIdsError,
-    dogIdsIsLoading,
+    dogIdsData,
+    dogIdsDataError,
+    dogIdsDataIsLoading,
   };
 };
 
