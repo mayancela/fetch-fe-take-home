@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import useSWR from "swr";
 import fetchData from "../utils/fetchData";
 
@@ -9,13 +8,9 @@ const fetcher = async (path: string) => {
 };
 
 const useDogBreeds = () => {
-  const router = useRouter();
+  const { data, error, isLoading } = useSWR("/dogs/breeds", fetcher);
 
-  const { data, error, isLoading } = useSWR("/dogs/breeds", fetcher, {
-    onError: (err) => {
-      if (err.status === 401) router.push("/");
-    },
-  });
+  console.log("data", data);
 
   return { data, error, isLoading };
 };
