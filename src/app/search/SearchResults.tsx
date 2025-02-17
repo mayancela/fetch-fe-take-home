@@ -7,9 +7,11 @@ import Box from "@mui/material/Box";
 import { useRouter } from "next/navigation";
 import LogoutButton from "../components/LogoutButton";
 import useSearchResults from "../hooks/useSearchResults";
+import DetailsGrid from "../components/DetailsGrid";
 
 const SearchResults = () => {
   const [breedsSelected, setBreedsSelected] = useState<string[]>([]);
+  const [favorites, setFavorites] = useState<string[]>([]);
   const { data: allDogBreeds, isLoading, error } = useDogBreeds();
 
   const {
@@ -20,10 +22,18 @@ const SearchResults = () => {
 
   const router = useRouter();
 
-  console.log("dogDetails", dogDetails);
-
   const handleBreedSelect = (breeds: string[]) => {
     setBreedsSelected(breeds);
+  };
+
+  const handleFavoriteSelect = (id: string, liked: boolean) => {
+    if (liked) {
+      if (!favorites.includes(id)) {
+        setFavorites([...favorites, id]);
+      }
+    } else {
+      setFavorites(favorites.filter((favoriteId) => favoriteId !== id));
+    }
   };
 
   useEffect(() => {
@@ -44,6 +54,12 @@ const SearchResults = () => {
         onBreedSelect={handleBreedSelect}
       />
       <LogoutButton />
+      {dogDetails && (
+        <DetailsGrid
+          dogs={dogDetails}
+          handleFavoriteSelect={handleFavoriteSelect}
+        />
+      )}
     </>
   );
 };
