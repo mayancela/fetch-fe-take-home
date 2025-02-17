@@ -1,7 +1,8 @@
 import fetchData from "../utils/fetchData";
 import useSWR from "swr";
 import useDogDetails from "./useDogDetails";
-import { SortDirection } from "../utils/types";
+import { AgeGroup, SortDirection } from "../utils/types";
+import { getAgeGroup } from "../utils/groupAges";
 
 const fetcher = async (path: string) => {
   const result = await fetchData(path, {
@@ -12,10 +13,17 @@ const fetcher = async (path: string) => {
 };
 
 const useSearchResults = (
+  ageGroup: AgeGroup,
   selectedBreeds?: string[],
   breedSort: SortDirection = "asc"
 ) => {
   const params = new URLSearchParams();
+  const ageValues = getAgeGroup(ageGroup);
+
+  if (ageValues) {
+    params.append("ageMin", ageValues.ageMin.toString());
+    params.append("ageMax", ageValues.ageMax.toString());
+  }
 
   if (selectedBreeds)
     selectedBreeds.map((breed) => params.append("breeds", breed));
