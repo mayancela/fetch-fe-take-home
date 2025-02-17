@@ -12,7 +12,7 @@ import DialogActions from "@mui/material/DialogActions";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/navigation";
-import useUserAuth from "../utils/useUserAuth";
+import useUserAuth from "../hooks/useUserAuth";
 
 const LoginFormDialog = () => {
   const [openModal, setOpenModal] = useState(false);

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import fetchData from "./fetchData";
+import fetchData from "../utils/fetchData";
 
 const useUserAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
