@@ -5,6 +5,7 @@ import useDogBreeds from "../hooks/useDogBreeds";
 import SelectBreeds from "../components/SelectBreeds";
 import Box from "@mui/material/Box";
 import { useRouter } from "next/navigation";
+import LogoutButton from "../components/LogoutButton";
 
 const SearchResults = () => {
   const [breedsSelected, setBreedsSelected] = useState<string[]>([]);
@@ -26,7 +27,12 @@ const SearchResults = () => {
   if (isLoading) return <Box>Loading breeds...</Box>; // to-do: loading spinner
   if (error) return null; // to-do: loading spinner while redirecting
 
-  return <SelectBreeds breeds={dogBreeds} onBreedSelect={handleBreedSelect} />;
+  return (
+    <>
+      <SelectBreeds breeds={dogBreeds} onBreedSelect={handleBreedSelect} />
+      <LogoutButton />
+    </>
+  );
 };
 
 export default SearchResults;
