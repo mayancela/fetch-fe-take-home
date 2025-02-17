@@ -1,6 +1,7 @@
 import fetchData from "../utils/fetchData";
 import useSWR from "swr";
 import useDogDetails from "./useDogDetails";
+import { SortDirection } from "../utils/types";
 
 const fetcher = async (path: string) => {
   const result = await fetchData(path, {
@@ -10,7 +11,10 @@ const fetcher = async (path: string) => {
   return result.json();
 };
 
-const useSearchResults = (selectedBreeds?: string[]) => {
+const useSearchResults = (
+  selectedBreeds?: string[],
+  breedSort: SortDirection = "asc"
+) => {
   const params = new URLSearchParams();
 
   if (selectedBreeds)
@@ -20,7 +24,10 @@ const useSearchResults = (selectedBreeds?: string[]) => {
     data: dogIds,
     error: dogIdsError,
     isLoading: dogIdsIsLoading,
-  } = useSWR(`/dogs/search?${params.toString()}`, fetcher);
+  } = useSWR(
+    `/dogs/search?sort=breed:${breedSort}&${params.toString()}`,
+    fetcher
+  );
 
   const resultIds = dogIds?.resultIds ?? [];
 
