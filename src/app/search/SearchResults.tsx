@@ -9,24 +9,24 @@ import LogoutButton from "../components/LogoutButton";
 import useSearchResults from "../hooks/useSearchResults";
 import DetailsGrid from "../components/DetailsGrid";
 import BreedSort from "../components/BreedSort";
-import { SortDirection } from "../utils/types";
+import { AgeGroup, SortDirection } from "../utils/types";
 import { SelectChangeEvent } from "@mui/material/Select";
+import AgeSelect from "../components/AgeSelect";
 
 const SearchResults = () => {
   const [breedsSelected, setBreedsSelected] = useState<string[]>([]);
   const [favorites, setFavorites] = useState<string[]>([]);
   const { data: allDogBreeds, isLoading, error } = useDogBreeds();
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
+  const [ageGroupSelected, setAgeGroupSelected] = useState<AgeGroup>("all");
 
   const {
     // isLoading: isResultsLoading,
     data: dogDetails,
     error: searchResultsError,
-  } = useSearchResults(breedsSelected, sortDirection);
+  } = useSearchResults(ageGroupSelected, breedsSelected, sortDirection);
 
   const router = useRouter();
-
-  console.log("dogDetails", dogDetails);
 
   const handleBreedSelect = (breeds: string[]) => {
     setBreedsSelected(breeds);
@@ -44,6 +44,10 @@ const SearchResults = () => {
 
   const handleSortChange = (event: SelectChangeEvent) => {
     setSortDirection(event.target.value as SortDirection); // to-do remove type assertion ?
+  };
+
+  const handleAgeGroupSelect = (event: SelectChangeEvent) => {
+    setAgeGroupSelected(event.target.value as AgeGroup); // to-do remove type assertion ?
   };
 
   useEffect(() => {
@@ -66,6 +70,10 @@ const SearchResults = () => {
       <BreedSort
         sortDirection={sortDirection}
         onSortChange={handleSortChange}
+      />
+      <AgeSelect
+        ageSelected={ageGroupSelected}
+        onAgeSelectedChange={handleAgeGroupSelect}
       />
       <LogoutButton />
       {dogDetails && (
