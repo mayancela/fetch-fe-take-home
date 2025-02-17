@@ -9,10 +9,7 @@ import LogoutButton from "../components/LogoutButton";
 
 const SearchResults = () => {
   const [breedsSelected, setBreedsSelected] = useState<string[]>([]);
-  const { data: dogBreeds, isLoading, error } = useDogBreeds();
-  const router = useRouter();
-
-  console.log(breedsSelected);
+  const { data: allDogBreeds, isLoading, error } = useDogBreeds();
 
   const handleBreedSelect = (breeds: string[]) => {
     setBreedsSelected(breeds);
@@ -29,7 +26,11 @@ const SearchResults = () => {
 
   return (
     <>
-      <SelectBreeds breeds={dogBreeds} onBreedSelect={handleBreedSelect} />
+      <SelectBreeds
+        allBreeds={allDogBreeds}
+        selectedBreeds={breedsSelected}
+        onBreedSelect={handleBreedSelect}
+      />
       <LogoutButton />
     </>
   );

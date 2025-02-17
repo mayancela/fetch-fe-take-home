@@ -29,16 +29,20 @@ const MenuProps = {
 // }
 
 type SelectBreedsProps = {
-  breeds: string[];
+  allBreeds: string[];
+  selectedBreeds: string[];
   onBreedSelect: (selectedBreeds: string[]) => void;
 };
 
-const SelectBreeds = ({ breeds, onBreedSelect }: SelectBreedsProps) => {
+const SelectBreeds = ({
+  allBreeds,
+  selectedBreeds,
+  onBreedSelect,
+}: SelectBreedsProps) => {
   // const theme = useTheme();
-  const [breedNames, setBreedNames] = React.useState<string[]>([]);
 
   const handleBreedSelection = (
-    event: SelectChangeEvent<typeof breedNames>
+    event: SelectChangeEvent<typeof selectedBreeds>
   ) => {
     // Ensure `value` is always an array
     const selectedBreeds =
@@ -46,19 +50,18 @@ const SelectBreeds = ({ breeds, onBreedSelect }: SelectBreedsProps) => {
         ? event.target.value.split(",")
         : event.target.value;
 
-    setBreedNames(selectedBreeds);
     onBreedSelect(selectedBreeds);
   };
 
   return (
     <Box>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="select-breed-label">Breed</InputLabel>
+        <InputLabel id="select-breed-label">Select Breeds</InputLabel>
         <Select
           labelId="select-breed-label"
           id="select-breed"
           multiple
-          value={breedNames}
+          value={selectedBreeds}
           onChange={handleBreedSelection}
           input={
             <OutlinedInput id="breed-selection" label="breed-selection-chip" />
@@ -72,7 +75,7 @@ const SelectBreeds = ({ breeds, onBreedSelect }: SelectBreedsProps) => {
           )}
           MenuProps={MenuProps}
         >
-          {breeds.map((breed: string) => (
+          {allBreeds.map((breed: string) => (
             <MenuItem
               key={`dog-breed-${breed}`}
               value={breed}
