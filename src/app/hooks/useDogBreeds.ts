@@ -10,8 +10,6 @@ const fetcher = async (path: string) => {
 const useDogBreeds = () => {
   const { data, error, isLoading } = useSWR("/dogs/breeds", fetcher);
 
-  console.log("data", data);
-
   return { data, error, isLoading };
 };
 

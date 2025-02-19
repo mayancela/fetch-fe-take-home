@@ -8,7 +8,6 @@ type DetailsGridProps = {
   handleFavoriteSelect: (id: string, liked: boolean) => void;
 };
 
-// favorites list?
 const DetailsGrid = ({ dogs, handleFavoriteSelect }: DetailsGridProps) => {
   return (
     <Grid2 container spacing={2}>

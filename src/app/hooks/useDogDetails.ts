@@ -13,7 +13,7 @@ const fetcher = async ([path, ids]: [string, number[]]) => {
   return result.json();
 };
 
-const useDogDetails = (resultIds: number[]) => {
+const useDogDetails = (resultIds: string[]) => {
   const { data, error, isLoading } = useSWR(
     resultIds.length > 0 ? ["/dogs", resultIds] : null,
     fetcher

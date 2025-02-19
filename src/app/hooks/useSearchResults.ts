@@ -29,7 +29,7 @@ const useSearchResults = (
     params.append("ageMax", ageValues.ageMax.toString());
   }
 
-  if (selectedBreeds)
+  if (selectedBreeds && selectedBreeds.length > 0)
     selectedBreeds.map((breed) => params.append("breeds", breed));
 
   const {
@@ -42,6 +42,8 @@ const useSearchResults = (
   );
 
   const resultIds = dogIdsData?.resultIds ?? [];
+
+  console.log("resultIDDS", resultIds);
 
   const { data, error, isLoading } = useDogDetails(resultIds);
 

@@ -14,8 +14,7 @@ import { SelectChangeEvent } from "@mui/material/Select";
 import AgeSelect from "../components/AgeSelect";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
-const RESULTS_SIZE = 30;
+import { HOME_PAGE, RESULTS_SIZE } from "../../../config";
 
 const SearchResults = () => {
   const [breedsSelected, setBreedsSelected] = useState<string[]>([]);
@@ -77,9 +76,15 @@ const SearchResults = () => {
     setCurrentPage(currentPage + 1);
   };
 
+  const handleMatchRedirect = () => {
+    // useContext?
+
+    router.push(`/match?ids=${favorites.join(",")}`); // update path
+  };
+
   useEffect(() => {
     if (error || searchResultsError) {
-      router.push("/"); //redirect to homepage/login page
+      router.push(HOME_PAGE); //redirect to homepage/login page
     }
   }, [error, router, searchResultsError]);
 
@@ -110,6 +115,9 @@ const SearchResults = () => {
       {favorites.length > 0 && (
         <Typography> {favorites.length} liked </Typography>
       )}
+      <Button onClick={handleMatchRedirect} disabled={!favorites.length}>
+        Match
+      </Button>
       {dogDetails && (
         <DetailsGrid
           dogs={dogDetails}
@@ -120,7 +128,7 @@ const SearchResults = () => {
         Prev
       </Button>
       <Typography>
-        {currentPage} of{" "}
+        {currentPage} of
         {totalResults && Math.ceil(totalResults / RESULTS_SIZE)}
       </Typography>
       <Button

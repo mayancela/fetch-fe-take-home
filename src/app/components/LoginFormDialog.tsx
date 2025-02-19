@@ -36,7 +36,7 @@ const LoginFormDialog = () => {
   useEffect(() => {
     if (isAuthenticated && !error) {
       handleClose();
-      push("/search");
+      push("/search"); //to=do: update search route
     } else if (error)
       setErrorMessage("Authentication failed. Please try again.");
   }, [isAuthenticated, error, push]);
