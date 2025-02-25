@@ -57,8 +57,6 @@ const MatchResults = () => {
 
   if (matchErrorMessage || error) <ErrorMessage message={matchErrorMessage} />;
 
-  console.log(dogData);
-
   return (
     <Box
       minWidth={500}
