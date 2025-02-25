@@ -1,5 +1,7 @@
 import React from "react";
 import SearchResults from "./SearchResults";
+import Container from "@mui/material/Container";
+import styles from "./page.module.css"
 
 export type DogProps = {
   id: string;
@@ -11,7 +13,11 @@ export type DogProps = {
 };
 
 const Search = () => {
-  return <SearchResults />;
+  return (
+    <Container className={styles.page}> 
+      <SearchResults />
+    </Container>
+  )
 };
 
 export default Search;
