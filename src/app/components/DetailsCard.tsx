@@ -8,11 +8,12 @@ import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { SMALL_GAP } from "../../../config";
 
 type DetailsCardProps = DogProps & {
   handleFavoriteSelect: (id: string, liked: boolean) => void;
 };
-const DetailsCard = ({
+const DetailsCard: React.FC<DetailsCardProps> = ({
   id,
   age,
   img,
@@ -20,7 +21,7 @@ const DetailsCard = ({
   name,
   zip_code,
   handleFavoriteSelect,
-}: DetailsCardProps) => {
+}) => {
   const [isLiked, setIsLiked] = useState(false);
 
   const handleLiked = () => {
@@ -28,7 +29,7 @@ const DetailsCard = ({
     handleFavoriteSelect(id, !isLiked);
   };
   return (
-    <Card sx={{ width: 225, margin: '5px' }} key={`dog-${id}`}>
+    <Card sx={{ width: 225, margin: { SMALL_GAP } }} key={`dog-${id}`}>
       <CardMedia
         component="img"
         height="140"
