@@ -1,16 +1,16 @@
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 
 type ErrorMessageProps = {
-    message: string,
-}
+  message: string;
+};
 
-const ErrorMessage: React.FC<ErrorMessageProps> = ({message}) => {
-    return (
-        <Container sx={{display: 'flex', justifyContent: 'center'}}>
-            <Typography color="red"> {message} </Typography>
-        </Container>
-    )
-}
+const ErrorMessage: React.FC<ErrorMessageProps> = ({ message }) => {
+  return (
+    <Container sx={{ display: "flex", justifyContent: "center" }}>
+      <Typography color="error"> {message} </Typography>
+    </Container>
+  );
+};
 
 export default ErrorMessage;
