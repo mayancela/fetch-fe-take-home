@@ -21,8 +21,8 @@ const LoginFormDialog = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const { push } = useRouter();
   const { loginUser, isLoading, isAuthenticated, error } = useUserAuth();
+  const { push } = useRouter();
 
   const handleOpen = () => setOpenModal(true);
   const handleModalClose = () => setOpenModal(false);
@@ -38,44 +38,52 @@ const LoginFormDialog = () => {
   useEffect(() => {
     if (isAuthenticated && !error) {
       handleModalClose();
-      push("/search"); 
+      push("/search");
     } else if (error)
       setErrorMessage("Authentication failed. Please try again.");
   }, [isAuthenticated, error, push]);
 
+  if (error || errorMessage) <ErrorMessage message={errorMessage} />;
 
   return (
-    <Container sx={{display: 'flex', justifyContent: 'center'}}>
-     { isLoading ? <CircularProgress /> :
-     <>
-     <Button size="large" variant="contained" onClick={handleOpen} disabled={isLoading}>
-        Get started
-      </Button>
-      <Dialog
-        open={openModal}
-        onClose={handleModalClose}
-        slotProps={{
-          paper: {
-            component: "form",
-            onSubmit: handleSubmit,
-          },
-        }}
-      >
-        <DialogTitle> Being searching </DialogTitle>
-        <DialogContent>
+    <Container sx={{ display: "flex", justifyContent: "center" }}>
+      {isLoading ? (
+        <CircularProgress />
+      ) : (
+        <>
+          <Button
+            size="large"
+            variant="contained"
+            onClick={handleOpen}
+            disabled={isLoading}
+          >
+            Get started
+          </Button>
+          <Dialog
+            open={openModal}
+            onClose={handleModalClose}
+            slotProps={{
+              paper: {
+                component: "form",
+                onSubmit: handleSubmit,
+              },
+            }}
+          >
+            <DialogTitle> Being searching </DialogTitle>
+            <DialogContent>
               <DialogContentText>
-                Enter name and email to view available dogs
+                Enter your name and email to view available dogs
               </DialogContentText>
               <Stack spacing={2}>
                 <TextField
                   label="Name"
                   variant="standard"
                   type="text"
-                  onChange={(e) => setName(e.target.value)} // to-do: could add extra validation for only letter inputs
+                  onChange={(e) => setName(e.target.value)}
                   autoFocus={!!errorMessage}
                   required
                   fullWidth
-                  sx={{pt: '10px'}}
+                  sx={{ pt: "10px" }}
                 />
                 <TextField
                   label="Email"
@@ -83,7 +91,7 @@ const LoginFormDialog = () => {
                   type="email"
                   onChange={(e) => setEmail(e.target.value)}
                   fullWidth
-                  sx={{pt: '10px'}}
+                  sx={{ pt: "10px" }}
                   required
                 />
                 {errorMessage && (
@@ -92,18 +100,22 @@ const LoginFormDialog = () => {
                   </Typography>
                 )}
               </Stack>
-        </DialogContent>
-        <DialogActions sx={{ display: 'flex', gap: '1em'}}>
-          <Button onClick={handleModalClose} disabled={!!isLoading} size="small">
-            Cancel
-          </Button>
-          <Button type="submit" disabled={!!isLoading} size="small">
-            Paw-ceed 
-          </Button>
-        </DialogActions>
-      </Dialog>
-     </>
-     }
+            </DialogContent>
+            <DialogActions sx={{ display: "flex", gap: "1em" }}>
+              <Button
+                onClick={handleModalClose}
+                disabled={!!isLoading}
+                size="small"
+              >
+                Cancel
+              </Button>
+              <Button type="submit" disabled={!!isLoading} size="small">
+                Paw-ceed
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </>
+      )}
     </Container>
   );
 };
