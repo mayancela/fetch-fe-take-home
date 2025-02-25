@@ -3,15 +3,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   min-width: 100vw;
   min-height: 100vh;
   width: 100%;
   top: 0;
   left: 0;
-  font-family: var(--font-geist-sans);
-  background-image: url('/9007454.png');
+  background-image: url("/9007454.png");
   background-repeat: no-repeat;
-  background-size:  cover; 
+  background-size: cover;
   background-attachment: fixed;
 }
-

@@ -1,13 +1,9 @@
 .page {
-    min-width: 100vw;
-    min-height: 100vh;
-    top: 0;
-    left: 0;
-    font-family: var(--font-geist-sans);
-
-    width: 100%;
-    background-attachment: fixed;
-    position: absolute;
-
-  }
-  
+  min-width: 100vw;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-attachment: fixed;
+  position: absolute;
+}
