@@ -8,7 +8,7 @@ Run the following command:
 
 ## View this project online~
 
-https://fetch-fe-take-home-38j9dih0v-mayancelas-projects.vercel.app/
+fetch-fe-take-home-gray.vercel.app
 
 ## Resources
 
