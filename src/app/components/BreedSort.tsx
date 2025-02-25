@@ -3,14 +3,17 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import React from "react";
-import { SortDirection } from "../utils/types";
+import { SortDirectionOptions } from "../utils/types";
 
 type BreedSortProps = {
-  sortDirection: SortDirection; // to-do: change to SortDirectionOptions
+  sortDirection: SortDirectionOptions; // to-do: change to SortDirectionOptions
   onSortChange: (event: SelectChangeEvent) => void;
 };
 
-const BreedSort = ({ sortDirection = "asc", onSortChange }: BreedSortProps) => {
+const BreedSort: React.FC<BreedSortProps> = ({
+  sortDirection = "asc",
+  onSortChange,
+}) => {
   return (
     <FormControl>
       <InputLabel id="sort-direction-label">Sort</InputLabel>
