@@ -6,11 +6,11 @@
   text-align: center;
   min-width: 100vw;
   min-height: 100vh;
-  width: 100%;
   top: 0;
   left: 0;
   background-image: url("/9007454.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  background-position: center center;
 }
