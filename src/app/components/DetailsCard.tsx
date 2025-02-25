@@ -28,7 +28,7 @@ const DetailsCard = ({
     handleFavoriteSelect(id, !isLiked);
   };
   return (
-    <Card sx={{ maxWidth: 275, margin: "16px" }} key={`dog-${id}`}>
+    <Card sx={{ width: 225, margin: '5px' }} key={`dog-${id}`}>
       <CardMedia
         component="img"
         height="140"

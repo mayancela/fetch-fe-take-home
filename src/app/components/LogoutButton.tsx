@@ -1,8 +1,8 @@
 import React from "react";
-import useUserAuth from "../hooks/useUserAuth";
 import Button from "@mui/material/Button";
 import { useRouter } from "next/navigation";
 import { HOME_PAGE } from "../../../config";
+import useUserAuth from "@/app/hooks/useUserAuth";
 
 const LogoutButton = () => {
   const { logoutUser, isAuthenticated, isLoading, error } = useUserAuth();
@@ -21,7 +21,7 @@ const LogoutButton = () => {
   };
 
   return (
-    <Button disabled={!!isLoading} onClick={handleOnClick}>
+    <Button disabled={!!isLoading} onClick={handleOnClick} size="large">
       Logout
     </Button>
   );

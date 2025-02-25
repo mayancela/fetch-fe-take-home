@@ -9,7 +9,6 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 
-// to-do: update generic styling
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -20,14 +19,6 @@ const MenuProps = {
     },
   },
 };
-
-// function getStyles(name: string, breedName: readonly string[], theme: Theme) {
-//   return {
-//     fontWeight: breedName.includes(name)
-//       ? theme.typography.fontWeightMedium
-//       : theme.typography.fontWeightRegular,
-//   };
-// }
 
 type SelectBreedsProps = {
   allBreeds: string[];
@@ -40,7 +31,6 @@ const SelectBreeds = ({
   selectedBreeds,
   onBreedSelect,
 }: SelectBreedsProps) => {
-  // const theme = useTheme();
 
   const handleBreedSelection = (
     event: SelectChangeEvent<typeof selectedBreeds>
@@ -60,7 +50,7 @@ const SelectBreeds = ({
 
   return (
     <Box>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ width: 300 }}>
         <InputLabel id="select-breed-label">Select Breeds</InputLabel>
         <Select
           labelId="select-breed-label"
@@ -79,12 +69,12 @@ const SelectBreeds = ({
             </Box>
           )}
           MenuProps={MenuProps}
+          sx={{ mb: 1}}
         >
           {allBreeds.map((breed: string) => (
             <MenuItem
               key={`dog-breed-${breed}`}
               value={breed}
-              // style={getStyles(breed, breedNames, theme)}
             >
               {breed}
             </MenuItem>
@@ -94,8 +84,9 @@ const SelectBreeds = ({
           variant="outlined"
           onClick={handleBreedReset}
           disabled={!selectedBreeds.length}
+          sx={{ width: '80%', margin: 'auto'}}
         >
-          Reset
+          Reset Breeds
         </Button>
       </FormControl>
     </Box>

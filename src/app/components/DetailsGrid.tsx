@@ -10,7 +10,7 @@ type DetailsGridProps = {
 
 const DetailsGrid = ({ dogs, handleFavoriteSelect }: DetailsGridProps) => {
   return (
-    <Grid2 container spacing={2}>
+    <Grid2 container spacing={2} justifyContent='center'>
       {dogs.map(({ id, age, img, breed, name, zip_code }) => {
         return (
           <DetailsCard

@@ -15,6 +15,7 @@ import AgeSelect from "../components/AgeSelect";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { HOME_PAGE, RESULTS_SIZE } from "../../../config";
+import Container from "@mui/material/Container";
 
 const SearchResults = () => {
   const [breedsSelected, setBreedsSelected] = useState<string[]>([]);
@@ -97,49 +98,65 @@ const SearchResults = () => {
   if (error || searchResultsError) return null; // to-do: loading spinner while redirecting
 
   return (
-    <>
-      <SelectBreeds
-        allBreeds={allDogBreeds}
-        selectedBreeds={breedsSelected}
-        onBreedSelect={handleBreedSelect}
-      />
-      <BreedSort
-        sortDirection={sortDirection}
-        onSortChange={handleSortChange}
-      />
-      <AgeSelect
-        ageSelected={ageGroupSelected}
-        onAgeSelectedChange={handleAgeGroupSelect}
-      />
-      <LogoutButton />
+    <Container sx={{display: 'flex', flexDirection: 'column'}}>
+      <Typography variant="h1" sx={{fontWeight: '600', textAlign: 'center'}}> Choose Your Favorites</Typography>
+      <Box sx={{mt: 2, mb: 2, display: 'flex', flexDirection: 'row', gap: '10px', justifyContent: 'space-between'}}> 
+        <Box sx={{display: 'flex', gap: '15px'}}> 
+          <SelectBreeds
+            allBreeds={allDogBreeds}
+            selectedBreeds={breedsSelected}
+            onBreedSelect={handleBreedSelect}
+          />
+          <BreedSort
+            sortDirection={sortDirection}
+            onSortChange={handleSortChange}
+          />
+          <AgeSelect
+            ageSelected={ageGroupSelected}
+            onAgeSelectedChange={handleAgeGroupSelect}
+          />
+
+        </Box>
+
+      <Box sx={{display: 'flex', alignItems: 'baseline', gap: "10px"}}> 
       {favorites.length > 0 && (
         <Typography> {favorites.length} liked </Typography>
       )}
-      <Button onClick={handleMatchRedirect} disabled={!favorites.length}>
-        Match
-      </Button>
+          <Button onClick={handleMatchRedirect} disabled={!favorites.length} size="large">
+            Match
+          </Button>
+      <LogoutButton />
+
+        </Box>
+      </Box>
+
       {dogDetails && (
         <DetailsGrid
           dogs={dogDetails}
           handleFavoriteSelect={handleFavoriteSelect}
         />
       )}
-      <Button onClick={handlePrev} disabled={currentPage === 1}>
+
+      <Box sx={{display: 'flex', justifyContent: 'center', gap: '15px', mt: 5, mb: 5}}> 
+      <Button onClick={handlePrev} disabled={currentPage === 1} size="small">
         Prev
       </Button>
       <Typography>
-        {currentPage} of
-        {totalResults && Math.ceil(totalResults / RESULTS_SIZE)}
+        {currentPage} of {totalResults && Math.ceil(totalResults / RESULTS_SIZE)}
       </Typography>
       <Button
         onClick={handleNext}
         disabled={
           totalResults && currentPage === Math.ceil(totalResults / RESULTS_SIZE)
         }
+        size="small"
       >
         Next
       </Button>
-    </>
+      </Box>
+      
+
+    </Container>
   );
 };
 

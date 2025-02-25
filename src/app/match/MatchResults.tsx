@@ -9,6 +9,7 @@ import LogoutButton from "../components/LogoutButton";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
+import { LARGE_GAP } from "../../../config";
 
 const MatchResults = () => {
   const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
@@ -53,18 +54,30 @@ const MatchResults = () => {
   }, [favoriteIds]);
 
   return (
-    <Container>
+    <>
       {data && (
-        <Box>
-          <Typography> {dogData.name} </Typography>
-          <Typography> {dogData.breed} </Typography>
-          <Typography> {dogData.zip_code} </Typography>
-          <Typography> {dogData.age} </Typography>
+        <Box minWidth={500} sx={{display: "flex", flexDirection: 'column', alignItems: 'center'}}>
+          <Typography variant="h1" component="h1"> You have a match! </Typography>
+          <img
+              src={dogData.img}
+              alt={`image-of-dog`}
+              loading="lazy"
+              width={400}
+              height={400}
+              style={{borderRadius: '15%'}}
+          />
+          <Box maxWidth={500} sx={{ mt: 2}}>
+            <Typography variant="body1" > 
+              Meet {dogData.name}, a {dogData.breed} who is ready to meet their forever paw-parents. {dogData.name} is {dogData.age} years old and is located at {dogData.zip_code}
+            </Typography>
+          </Box>
         </Box>
       )}
-      <Button onClick={() => router.push("/search")}> Start Over</Button>
-      <LogoutButton />
-    </Container>
+      <Box sx={{display: 'flex', flexDirection: 'row', gap: LARGE_GAP, mt: 2}}>
+        <Button onClick={() => router.push("/search")} size="large"> Start Over </Button>
+        <LogoutButton />
+      </Box>
+    </>
   );
 };
 
