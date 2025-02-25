@@ -3,12 +3,12 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
-import { DogProps } from "../search/page";
 import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { SMALL_GAP } from "../../../config";
+import { DogProps } from "../utils/types";
 
 type DetailsCardProps = DogProps & {
   handleFavoriteSelect: (id: string, liked: boolean) => void;

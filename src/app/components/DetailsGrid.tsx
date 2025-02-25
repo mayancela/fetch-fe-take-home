@@ -1,16 +1,19 @@
 import Grid2 from "@mui/material/Grid2";
 import React from "react";
-import { DogProps } from "../search/page";
 import DetailsCard from "./DetailsCard";
+import { DogProps } from "../utils/types";
 
 type DetailsGridProps = {
   dogs: DogProps[];
   handleFavoriteSelect: (id: string, liked: boolean) => void;
 };
 
-const DetailsGrid = ({ dogs, handleFavoriteSelect }: DetailsGridProps) => {
+const DetailsGrid: React.FC<DetailsGridProps> = ({
+  dogs,
+  handleFavoriteSelect,
+}) => {
   return (
-    <Grid2 container spacing={2} justifyContent='center'>
+    <Grid2 container spacing={2} justifyContent="center">
       {dogs.map(({ id, age, img, breed, name, zip_code }) => {
         return (
           <DetailsCard
