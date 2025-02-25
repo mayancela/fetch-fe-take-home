@@ -12,7 +12,9 @@ import DialogActions from "@mui/material/DialogActions";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/navigation";
-import useUserAuth from "../hooks/useUserAuth";
+import CircularProgress from "@mui/material/CircularProgress";
+import useUserAuth from "@/app/hooks/useUserAuth";
+import ErrorMessage from "./ErrorMessage";
 
 const LoginFormDialog = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -23,7 +25,7 @@ const LoginFormDialog = () => {
   const { loginUser, isLoading, isAuthenticated, error } = useUserAuth();
 
   const handleOpen = () => setOpenModal(true);
-  const handleClose = () => setOpenModal(false);
+  const handleModalClose = () => setOpenModal(false);
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -35,20 +37,23 @@ const LoginFormDialog = () => {
 
   useEffect(() => {
     if (isAuthenticated && !error) {
-      handleClose();
-      push("/search"); //to=do: update search route
+      handleModalClose();
+      push("/search"); 
     } else if (error)
       setErrorMessage("Authentication failed. Please try again.");
   }, [isAuthenticated, error, push]);
 
+
   return (
-    <Container>
-      <Button size="large" variant="contained" onClick={handleOpen}>
-        Log in
+    <Container sx={{display: 'flex', justifyContent: 'center'}}>
+     { isLoading ? <CircularProgress /> :
+     <>
+     <Button size="large" variant="contained" onClick={handleOpen} disabled={isLoading}>
+        Get started
       </Button>
       <Dialog
         open={openModal}
-        onClose={handleClose}
+        onClose={handleModalClose}
         slotProps={{
           paper: {
             component: "form",
@@ -56,12 +61,10 @@ const LoginFormDialog = () => {
           },
         }}
       >
-        <DialogTitle> Login </DialogTitle>
+        <DialogTitle> Being searching </DialogTitle>
         <DialogContent>
-          {!isLoading ? (
-            <>
               <DialogContentText>
-                Enter name and email to being searching
+                Enter name and email to view available dogs
               </DialogContentText>
               <Stack spacing={2}>
                 <TextField
@@ -71,12 +74,16 @@ const LoginFormDialog = () => {
                   onChange={(e) => setName(e.target.value)} // to-do: could add extra validation for only letter inputs
                   autoFocus={!!errorMessage}
                   required
+                  fullWidth
+                  sx={{pt: '10px'}}
                 />
                 <TextField
                   label="Email"
                   variant="standard"
                   type="email"
                   onChange={(e) => setEmail(e.target.value)}
+                  fullWidth
+                  sx={{pt: '10px'}}
                   required
                 />
                 {errorMessage && (
@@ -85,20 +92,18 @@ const LoginFormDialog = () => {
                   </Typography>
                 )}
               </Stack>
-            </>
-          ) : (
-            <Typography variant="body1"> Loading... </Typography> // to-do: loading spinner? https://loading.io/
-          )}
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} disabled={!!isLoading}>
+        <DialogActions sx={{ display: 'flex', gap: '1em'}}>
+          <Button onClick={handleModalClose} disabled={!!isLoading} size="small">
             Cancel
           </Button>
-          <Button type="submit" disabled={!!isLoading}>
-            Paw-ceed! // Let&apos;s go! {/* choose one */}
+          <Button type="submit" disabled={!!isLoading} size="small">
+            Paw-ceed 
           </Button>
         </DialogActions>
       </Dialog>
+     </>
+     }
     </Container>
   );
 };
