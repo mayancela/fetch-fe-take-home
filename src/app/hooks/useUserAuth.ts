@@ -8,6 +8,7 @@ const useUserAuth = () => {
 
   const loginUser = async (name: string, email: string) => {
     setIsLoading(true);
+    setError(false);
 
     try {
       const result = await fetchData("/auth/login", {

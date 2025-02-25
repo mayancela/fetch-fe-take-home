@@ -1,7 +1,7 @@
 import fetchData from "../utils/fetchData";
 import useSWR from "swr";
 import useDogDetails from "./useDogDetails";
-import { AgeGroup, SortDirection } from "../utils/types";
+import { AgeGroup, SortDirectionOptions } from "../utils/types";
 import { getAgeGroup } from "../utils/groupAges";
 
 const fetcher = async (path: string) => {
@@ -17,7 +17,7 @@ const useSearchResults = (
   resultsSize: number,
   ageGroup: AgeGroup,
   selectedBreeds?: string[],
-  breedSort: SortDirection = "asc"
+  breedSort: SortDirectionOptions = "asc"
 ) => {
   const params = new URLSearchParams();
   const ageValues = getAgeGroup(ageGroup);
@@ -42,8 +42,6 @@ const useSearchResults = (
   );
 
   const resultIds = dogIdsData?.resultIds ?? [];
-
-  console.log("resultIDDS", resultIds);
 
   const { data, error, isLoading } = useDogDetails(resultIds);
 
