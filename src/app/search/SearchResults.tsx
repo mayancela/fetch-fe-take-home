@@ -1,23 +1,23 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import useDogBreeds from "../hooks/useDogBreeds";
-import SelectBreeds from "../components/SelectBreeds";
 import Box from "@mui/material/Box";
 import { useRouter } from "next/navigation";
-import LogoutButton from "../components/LogoutButton";
-import useSearchResults from "../hooks/useSearchResults";
-import DetailsGrid from "../components/DetailsGrid";
-import BreedSort from "../components/BreedSort";
-import { AgeGroup, SortDirectionOptions } from "../utils/types";
 import { SelectChangeEvent } from "@mui/material/Select";
-import AgeSelect from "../components/SelectAge";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { HOME_PAGE, RESULTS_SIZE } from "../../../config";
+import { HOME_PAGE, RESULTS_SIZE } from "@/utils/config";
 import Container from "@mui/material/Container";
 import { CircularProgress } from "@mui/material";
-import ErrorMessage from "../components/ErrorMessage";
+import ErrorMessage from "@/components/ErrorMessage";
+import SelectBreeds from "@/components/DogBreedsDropdown";
+import BreedSort from "@/components/SortDirectionDropdown";
+import AgeSelect from "@/components/DogAgeDropdown";
+import LogoutButton from "@/components/LogoutButton";
+import DetailsGrid from "@/components/DetailsGrid";
+import { AgeGroup, SortDirectionOptions } from "@/utils/types";
+import useDogBreeds from "@/hooks/useDogBreeds";
+import useSearchResults from "@/hooks/useSearchResults";
 
 const SearchResults = () => {
   const [breedsSelected, setBreedsSelected] = useState<string[]>([]);

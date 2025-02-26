@@ -2,16 +2,16 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import useDogDetails from "../hooks/useDogDetails";
-import fetchDogMatch from "../utils/fetchDogMatch";
-import LogoutButton from "../components/LogoutButton";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import { LARGE_GAP } from "../../../config";
+import { LARGE_GAP } from "@/utils/config";
 import Image from "next/image";
-import ErrorMessage from "../components/ErrorMessage";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
+import ErrorMessage from "@/components/ErrorMessage";
+import LogoutButton from "@/components/LogoutButton";
+import useDogDetails from "@/hooks/useDogDetails";
+import fetchDogMatch from "@/utils/fetchDogMatch";
 
 const MatchResults = () => {
   const [favoriteIds, setFavoriteIds] = useState<string[]>([]);

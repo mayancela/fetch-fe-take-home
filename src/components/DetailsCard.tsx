@@ -7,8 +7,8 @@ import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { SMALL_GAP } from "../../../config";
-import { DogProps } from "../utils/types";
+import { SMALL_GAP } from "@/utils/config";
+import { DogProps } from "@/utils/types";
 
 type DetailsCardProps = DogProps & {
   handleFavoriteSelect: (id: string, liked: boolean) => void;

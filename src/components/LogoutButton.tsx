@@ -1,9 +1,9 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import { useRouter } from "next/navigation";
-import { HOME_PAGE } from "../../../config";
-import useUserAuth from "@/app/hooks/useUserAuth";
 import ErrorMessage from "./ErrorMessage";
+import { HOME_PAGE } from "@/utils/config";
+import useUserAuth from "@/hooks/useUserAuth";
 
 const LogoutButton = () => {
   const { logoutUser, isAuthenticated, isLoading, error } = useUserAuth();

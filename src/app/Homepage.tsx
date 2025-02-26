@@ -1,7 +1,7 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
-import LoginFormDialog from "./components/LoginFormDialog";
 import Box from "@mui/material/Box";
+import LoginFormDialog from "@/components/LoginFormDialog";
 
 const Homepage = () => {
   return (

@@ -1,12 +1,12 @@
+import { SortDirectionOptions } from "@/utils/types";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import React from "react";
-import { SortDirectionOptions } from "../utils/types";
 
 type BreedSortProps = {
-  sortDirection: SortDirectionOptions; // to-do: change to SortDirectionOptions
+  sortDirection: SortDirectionOptions; 
   onSortChange: (event: SelectChangeEvent) => void;
 };
 

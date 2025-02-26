@@ -13,8 +13,8 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/navigation";
 import CircularProgress from "@mui/material/CircularProgress";
-import useUserAuth from "@/app/hooks/useUserAuth";
 import ErrorMessage from "./ErrorMessage";
+import useUserAuth from "@/hooks/useUserAuth";
 
 const LoginFormDialog = () => {
   const [openModal, setOpenModal] = useState(false);

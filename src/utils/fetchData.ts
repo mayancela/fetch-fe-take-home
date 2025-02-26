@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../../config";
+import { BASE_URL } from "./config";
 
 const fetchData = async (path: string, options?: RequestInit) => {
   const response = await fetch(`${BASE_URL}${path}`, {

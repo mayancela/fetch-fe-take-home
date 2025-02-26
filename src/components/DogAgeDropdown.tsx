@@ -2,9 +2,9 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import React from "react";
-import { AgeGroup } from "../utils/types";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
+import { AgeGroup } from "@/utils/types";
 
 type AgeSelectProps = {
   ageSelected: AgeGroup;
