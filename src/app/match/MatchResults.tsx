@@ -69,7 +69,7 @@ const MatchResults = () => {
       {isMatchLoading || (isLoading && <CircularProgress />)}
       {data && dogData && (
         <>
-          <Typography variant="h1">You have a match!</Typography>
+          <Typography variant="h1" fontWeight={600}>You have a match!</Typography>
           {dogData.img && (
             <Image
               src={dogData.img}

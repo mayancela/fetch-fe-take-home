@@ -1,6 +1,6 @@
 :root {
   --background: #eeeeee;
-  --foreground: #171717;
+  --foreground: #272827;
 }
 
 html,
@@ -21,7 +21,7 @@ body {
 
 * {
   box-sizing: border-box;
-  color: #202120;
+  color: var(--foreground);
 }
 
 a {

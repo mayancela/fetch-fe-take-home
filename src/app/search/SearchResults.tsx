@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { SelectChangeEvent } from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { HOME_PAGE, RESULTS_SIZE } from "@/utils/config";
+import { HOME_PAGE, LARGE_GAP, RESULTS_SIZE } from "@/utils/config";
 import Container from "@mui/material/Container";
 import { CircularProgress } from "@mui/material";
 import ErrorMessage from "@/components/ErrorMessage";

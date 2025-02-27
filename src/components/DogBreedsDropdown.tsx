@@ -48,8 +48,7 @@ const SelectBreeds = ({
   };
 
   return (
-    <Box>
-      <FormControl sx={{ width: 300 }}>
+      <FormControl sx={{ width: 275 }}>
         <InputLabel id="select-breed-label">Select Breeds</InputLabel>
         <Select
           labelId="select-breed-label"
@@ -70,7 +69,7 @@ const SelectBreeds = ({
           MenuProps={MenuProps}
           sx={{ mb: 1}}
         >
-          {allBreeds.map((breed: string) => (
+          {allBreeds && allBreeds.map((breed: string) => (
             <MenuItem
               key={`dog-breed-${breed}`}
               value={breed}
@@ -88,7 +87,6 @@ const SelectBreeds = ({
           Reset Breeds
         </Button>
       </FormControl>
-    </Box>
   );
 };
 
