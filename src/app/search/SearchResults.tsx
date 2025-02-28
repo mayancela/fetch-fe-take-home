@@ -18,6 +18,7 @@ import DetailsGrid from "@/components/DetailsGrid";
 import { AgeGroup, SortDirectionOptions, SortOptions } from "@/utils/types";
 import useDogBreeds from "@/hooks/useDogBreeds";
 import useSearchResults from "@/hooks/useSearchResults";
+import NavBar from "@/components/NavBar";
 import SortOptionsDropdown from "@/components/SortOptionsDropdown";
 
 const SearchResults = () => {
@@ -110,6 +111,7 @@ const SearchResults = () => {
 
   return (
     <Container sx={{ display: "flex", flexDirection: "column" }}>
+      <NavBar />
       <Typography variant="h1" sx={{ fontWeight: "600", textAlign: "center" }}>
         Choose Your Favorites
       </Typography>
