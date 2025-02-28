@@ -1,5 +1,7 @@
 export type SortDirectionOptions = "asc" | "desc";
 
+export type SortOptions = "breed" | "name" | "age";
+
 export type AgeGroup = "all" | "puppy" | "adult" | "senior";
 
 export type DogProps = {

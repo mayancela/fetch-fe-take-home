@@ -158,9 +158,14 @@ const SearchResults = () => {
               >
                 Match
               </Button>
-              <LogoutButton />
+            
             </Box>
           </Box>
+            <Box sx={{ display: "flex", alignItems: "flex-start", gap: "10px", justifyContent: 'center', mb: 1}}> 
+            {favorites.length > 0 && (
+                <Typography variant="body1"> You've liked {favorites.length} dog{favorites.length === 1 ? "gy": "gies"}! </Typography>
+              )}
+            </Box>
           {dogDetails && (
             <DetailsGrid
               dogs={dogDetails}
