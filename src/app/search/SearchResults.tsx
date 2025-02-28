@@ -110,13 +110,14 @@ const SearchResults = () => {
     return <ErrorMessage message={dogBreedsError || dogDetailsError} />;
 
   return (
-    <Container sx={{ display: "flex", flexDirection: "column" }}>
+    <Container sx={{ display: "flex", flexDirection: "column", justifyContent:'center' }}>
       <NavBar />
       <Typography variant="h1" sx={{ fontWeight: "600", textAlign: "center" }}>
         Choose Your Favorites
       </Typography>
       {isDogDetailsLoading || isDogBreedsLoading ? (
-        <CircularProgress />
+        <Box display="flex" justifyContent="center"sx={{mt: 4}}><CircularProgress /></Box>
+
       ) : (
         <>
           <Box
@@ -127,9 +128,10 @@ const SearchResults = () => {
               flexDirection: "row",
               gap: "10px",
               justifyContent: "space-between",
+              alignItems: 'baseline'
             }}
           >
-            <Box sx={{ display: "flex", gap: "15px" }}>
+            <Box sx={{ display: "flex", gap: LARGE_GAP, justifyContent: 'flex-start'}}>
               <SelectBreeds
                 allBreeds={allDogBreeds}
                 selectedBreeds={breedsSelected}
@@ -182,7 +184,7 @@ const SearchResults = () => {
               Prev
             </Button>
             <Typography>
-              {currentPage} of
+              {currentPage} of {' '}
               {totalResults && Math.ceil(totalResults / RESULTS_SIZE)}
             </Typography>
             <Button

@@ -9,6 +9,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { SMALL_GAP } from "@/utils/config";
 import { DogProps } from "@/utils/types";
+import { getAgeGroupFromAge } from "@/utils/groupAges";
+import { capitalizeFirst } from "@/utils/capitalizeFirstChar";
 
 type DetailsCardProps = DogProps & {
   handleFavoriteSelect: (id: string, liked: boolean) => void;
@@ -23,6 +25,7 @@ const DetailsCard: React.FC<DetailsCardProps> = ({
   handleFavoriteSelect,
 }) => {
   const [isLiked, setIsLiked] = useState(false);
+  const ageGroup = getAgeGroupFromAge(age)
 
   const handleLiked = () => {
     setIsLiked(!isLiked);
@@ -42,18 +45,20 @@ const DetailsCard: React.FC<DetailsCardProps> = ({
           {name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Breed: {breed}
+          <strong>Breed:</strong> {breed}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Age: {age}
+          <strong>Age: </strong> {age}
+          {ageGroup && ( <Typography component="span" variant="body2"> | {capitalizeFirst(ageGroup)} </Typography> )}
         </Typography>
+ 
         <Typography variant="body2" color="text.secondary">
           ZIP Code: {zip_code}
         </Typography>
       </CardContent>
       <CardActions>
         <IconButton onClick={handleLiked}>
-          {!isLiked ? <FavoriteBorderIcon /> : <FavoriteIcon color="primary" />}
+          {!isLiked ? <FavoriteBorderIcon sx={{ fill: '#eee' }}/> : <FavoriteIcon sx={{ fill: '#eee' }} />}
         </IconButton>
       </CardActions>
     </Card>
