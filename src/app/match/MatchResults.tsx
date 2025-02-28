@@ -81,7 +81,7 @@ const MatchResults = () => {
             />
           )}
           <Box maxWidth={500} sx={{ mt: 2 }}>
-            <Typography variant="body1">
+            <Typography variant="body1" fontWeight="500">
               Meet {dogData.name}, a {dogData.breed} who is ready to meet their
               forever paw-parents. {dogData.name} is {dogData.age} years old and
               is located at zipcode {dogData.zip_code}.
