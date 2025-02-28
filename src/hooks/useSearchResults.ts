@@ -1,8 +1,8 @@
 import fetchData from "../utils/fetchData";
 import useSWR from "swr";
 import useDogDetails from "./useDogDetails";
-import { AgeGroup, SortDirectionOptions } from "../utils/types";
-import { getAgeGroup } from "../utils/groupAges";
+import { AgeGroup, SortDirectionOptions, SortOptions } from "@/utils/types";
+import { getAgeRanges } from "@/utils/groupAges";
 
 const fetcher = async (path: string) => {
   const result = await fetchData(path, {
@@ -17,10 +17,11 @@ const useSearchResults = (
   resultsSize: number,
   ageGroup: AgeGroup,
   selectedBreeds?: string[],
+  sortOption: SortOptions = "breed",
   breedSort: SortDirectionOptions = "asc"
 ) => {
   const params = new URLSearchParams();
-  const ageValues = getAgeGroup(ageGroup);
+  const ageValues = getAgeRanges(ageGroup);
 
   params.append("from", ((currentPage - 1) * resultsSize).toString());
 
@@ -32,12 +33,14 @@ const useSearchResults = (
   if (selectedBreeds && selectedBreeds.length > 0)
     selectedBreeds.map((breed) => params.append("breeds", breed));
 
+  console.log(sortOption, breedSort)
+
   const {
     data: dogIdsData,
     error: dogIdsDataError,
     isLoading: dogIdsDataIsLoading,
   } = useSWR(
-    `/dogs/search?size=${resultsSize}&sort=breed:${breedSort}&${params.toString()}`,
+    `/dogs/search?size=${resultsSize}&sort=${sortOption}:${breedSort}&${params.toString()}`,
     fetcher
   );
 

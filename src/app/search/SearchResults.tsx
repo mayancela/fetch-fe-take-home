@@ -15,15 +15,18 @@ import BreedSort from "@/components/SortDirectionDropdown";
 import AgeSelect from "@/components/DogAgeDropdown";
 import LogoutButton from "@/components/LogoutButton";
 import DetailsGrid from "@/components/DetailsGrid";
-import { AgeGroup, SortDirectionOptions } from "@/utils/types";
+import { AgeGroup, SortDirectionOptions, SortOptions } from "@/utils/types";
 import useDogBreeds from "@/hooks/useDogBreeds";
 import useSearchResults from "@/hooks/useSearchResults";
+import SortOptionsDropdown from "@/components/SortOptionsDropdown";
 
 const SearchResults = () => {
   const [breedsSelected, setBreedsSelected] = useState<string[]>([]);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [sortDirection, setSortDirection] =
     useState<SortDirectionOptions>("asc");
+  const [sortOption, setSortOption] =
+    useState<SortOptions>("breed");
   const [ageGroupSelected, setAgeGroupSelected] = useState<AgeGroup>("all");
   const [totalResults, setTotalResults] = useState();
   const [currentPage, setCurrentPage] = useState(1);
@@ -44,6 +47,7 @@ const SearchResults = () => {
     RESULTS_SIZE,
     ageGroupSelected,
     breedsSelected,
+    sortOption,
     sortDirection
   );
 
@@ -66,6 +70,11 @@ const SearchResults = () => {
 
   const handleSortChange = (event: SelectChangeEvent) => {
     setSortDirection(event.target.value as SortDirectionOptions);
+    setCurrentPage(1);
+  };
+
+  const handleSortOption = (event: SelectChangeEvent) => {
+    setSortOption(event.target.value as SortOptions);
     setCurrentPage(1);
   };
 
@@ -124,20 +133,20 @@ const SearchResults = () => {
                 selectedBreeds={breedsSelected}
                 onBreedSelect={handleBreedSelect}
               />
-              <BreedSort
-                sortDirection={sortDirection}
-                onSortChange={handleSortChange}
-              />
               <AgeSelect
                 ageSelected={ageGroupSelected}
                 onAgeSelectedChange={handleAgeGroupSelect}
               />
             </Box>
 
-            <Box sx={{ display: "flex", alignItems: "baseline", gap: "10px" }}>
-              {favorites.length > 0 && (
-                <Typography> {favorites.length} liked </Typography>
-              )}
+            <Box sx={{ display: "flex", alignItems: "baseline", gap: "10px", justifyContent: 'flex-end', mt: 2, mb: 2}}>
+
+            <SortOptionsDropdown searchFilters={sortOption} onFilterChange={handleSortOption}/>
+              <BreedSort
+                sortDirection={sortDirection}
+                onSortChange={handleSortChange}
+              />
+                
               <Button
                 onClick={handleMatchRedirect}
                 disabled={!favorites.length}
