@@ -9,11 +9,9 @@ import Typography from "@mui/material/Typography";
 import { HOME_PAGE, LARGE_GAP, RESULTS_SIZE } from "@/utils/config";
 import Container from "@mui/material/Container";
 import { CircularProgress } from "@mui/material";
-import ErrorMessage from "@/components/ErrorMessage";
 import SelectBreeds from "@/components/DogBreedsDropdown";
 import BreedSort from "@/components/SortDirectionDropdown";
 import AgeSelect from "@/components/DogAgeDropdown";
-import LogoutButton from "@/components/LogoutButton";
 import DetailsGrid from "@/components/DetailsGrid";
 import { AgeGroup, SortDirectionOptions, SortOptions } from "@/utils/types";
 import useDogBreeds from "@/hooks/useDogBreeds";
@@ -26,8 +24,7 @@ const SearchResults = () => {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [sortDirection, setSortDirection] =
     useState<SortDirectionOptions>("asc");
-  const [sortOption, setSortOption] =
-    useState<SortOptions>("breed");
+  const [sortOption, setSortOption] = useState<SortOptions>("breed");
   const [ageGroupSelected, setAgeGroupSelected] = useState<AgeGroup>("all");
   const [totalResults, setTotalResults] = useState();
   const [currentPage, setCurrentPage] = useState(1);
@@ -97,27 +94,39 @@ const SearchResults = () => {
   };
 
   useEffect(() => {
-    if (dogBreedsError || dogDetailsError) {
-      router.push(HOME_PAGE);
+    if (!isDogBreedsLoading && !isDogDetailsLoading) {
+      if (dogBreedsError || dogDetailsError) {
+        router.push(HOME_PAGE);
+      }
     }
-  }, [dogBreedsError, router, dogDetailsError]);
+  }, [
+    dogBreedsError,
+    dogDetailsError,
+    isDogBreedsLoading,
+    isDogDetailsLoading,
+    router,
+  ]);
 
   useEffect(() => {
     if (dogIdsData && dogIdsData.total) setTotalResults(dogIdsData.total);
   }, [dogIdsData]);
 
-  if (dogBreedsError || dogDetailsError)
-    return <ErrorMessage message={dogBreedsError || dogDetailsError} />;
-
   return (
-    <Container sx={{ display: "flex", flexDirection: "column", justifyContent:'center' }}>
+    <Container
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}
+    >
       <NavBar />
       <Typography variant="h1" sx={{ fontWeight: "600", textAlign: "center" }}>
         Choose Your Favorites
       </Typography>
       {isDogDetailsLoading || isDogBreedsLoading ? (
-        <Box display="flex" justifyContent="center"sx={{mt: 4}}><CircularProgress /></Box>
-
+        <Box display="flex" justifyContent="center" sx={{ mt: 4 }}>
+          <CircularProgress />
+        </Box>
       ) : (
         <>
           <Box
@@ -128,10 +137,16 @@ const SearchResults = () => {
               flexDirection: "row",
               gap: "10px",
               justifyContent: "space-between",
-              alignItems: 'baseline'
+              alignItems: "baseline",
             }}
           >
-            <Box sx={{ display: "flex", gap: LARGE_GAP, justifyContent: 'flex-start'}}>
+            <Box
+              sx={{
+                display: "flex",
+                gap: LARGE_GAP,
+                justifyContent: "flex-start",
+              }}
+            >
               <SelectBreeds
                 allBreeds={allDogBreeds}
                 selectedBreeds={breedsSelected}
@@ -143,14 +158,24 @@ const SearchResults = () => {
               />
             </Box>
 
-            <Box sx={{ display: "flex", alignItems: "baseline", gap: "10px", justifyContent: 'flex-end', mt: 2, mb: 2}}>
-
-            <SortOptionsDropdown searchFilters={sortOption} onFilterChange={handleSortOption}/>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "baseline",
+                gap: "10px",
+                justifyContent: "flex-end",
+                mt: 2,
+                mb: 2,
+              }}
+            >
+              <SortOptionsDropdown
+                searchFilters={sortOption}
+                onFilterChange={handleSortOption}
+              />
               <BreedSort
                 sortDirection={sortDirection}
                 onSortChange={handleSortChange}
               />
-                
               <Button
                 onClick={handleMatchRedirect}
                 disabled={!favorites.length}
@@ -158,51 +183,63 @@ const SearchResults = () => {
               >
                 Match
               </Button>
-            
             </Box>
           </Box>
-            <Box sx={{ display: "flex", alignItems: "flex-start", gap: "10px", justifyContent: 'center', mb: 1}}> 
-            {favorites.length > 0 && (
-                <Typography variant="body1"> You've liked {favorites.length} dog{favorites.length === 1 ? "gy": "gies"}! </Typography>
-              )}
-            </Box>
-          {dogDetails && (
-            <DetailsGrid
-              dogs={dogDetails}
-              handleFavoriteSelect={handleFavoriteSelect}
-            />
-          )}
           <Box
             sx={{
               display: "flex",
+              alignItems: "center",
               justifyContent: "center",
-              gap: "15px",
-              mt: 5,
-              mb: 5,
+              gap: "10px",
+              mb: 0.5,
             }}
           >
-            <Button
-              onClick={handlePrev}
-              disabled={currentPage === 1}
-              size="small"
-            >
-              Prev
-            </Button>
-            <Typography>
-              {currentPage} of {' '}
-              {totalResults && Math.ceil(totalResults / RESULTS_SIZE)}
-            </Typography>
-            <Button
-              onClick={handleNext}
-              disabled={
-                totalResults &&
-                currentPage === Math.ceil(totalResults / RESULTS_SIZE)
-              }
-              size="small"
-            >
-              Next
-            </Button>
+            {favorites.length > 0 && (
+              <Typography variant="body1">
+                You&apos;ve liked {favorites.length} dog
+                {favorites.length === 1 ? "gy" : "gies"}!{" "}
+              </Typography>
+            )}
           </Box>
+          {dogDetails && dogDetails.length > 0 && (
+            <>
+              <DetailsGrid
+                dogs={dogDetails}
+                handleFavoriteSelect={handleFavoriteSelect}
+              />
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  gap: "15px",
+                  mt: 5,
+                  mb: 5,
+                }}
+              >
+                <Button
+                  onClick={handlePrev}
+                  disabled={currentPage === 1}
+                  size="small"
+                >
+                  Prev
+                </Button>
+                <Typography>
+                  {currentPage} of{" "}
+                  {totalResults && Math.ceil(totalResults / RESULTS_SIZE)}
+                </Typography>
+                <Button
+                  onClick={handleNext}
+                  disabled={
+                    totalResults &&
+                    currentPage === Math.ceil(totalResults / RESULTS_SIZE)
+                  }
+                  size="small"
+                >
+                  Next
+                </Button>
+              </Box>
+            </>
+          )}
         </>
       )}
     </Container>

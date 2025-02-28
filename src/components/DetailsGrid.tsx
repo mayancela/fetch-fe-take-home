@@ -1,7 +1,7 @@
 import Grid2 from "@mui/material/Grid2";
 import React from "react";
 import DetailsCard from "./DetailsCard";
-import { DogProps } from "../utils/types";
+import { DogProps } from "@/utils/types";
 
 type DetailsGridProps = {
   dogs: DogProps[];

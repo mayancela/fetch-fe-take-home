@@ -2,7 +2,7 @@ import fetchData from "../utils/fetchData";
 import useSWR from "swr";
 import useDogDetails from "./useDogDetails";
 import { AgeGroup, SortDirectionOptions, SortOptions } from "@/utils/types";
-import { getAgeRanges } from "@/utils/groupAges";
+import { getAgeRanges } from "@/utils/getAgeDetails";
 
 const fetcher = async (path: string) => {
   const result = await fetchData(path, {
@@ -32,8 +32,6 @@ const useSearchResults = (
 
   if (selectedBreeds && selectedBreeds.length > 0)
     selectedBreeds.map((breed) => params.append("breeds", breed));
-
-  console.log(sortOption, breedSort)
 
   const {
     data: dogIdsData,

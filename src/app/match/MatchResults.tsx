@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import { LARGE_GAP } from "@/utils/config";
+import { LARGE_GAP, SEARCH_PAGE } from "@/utils/config";
 import Image from "next/image";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
@@ -69,7 +69,9 @@ const MatchResults = () => {
       {isMatchLoading || (isLoading && <CircularProgress />)}
       {data && dogData && (
         <>
-          <Typography variant="h1" fontWeight={600}>You have a match!</Typography>
+          <Typography variant="h1" fontWeight={600}>
+            You have a match!
+          </Typography>
           {dogData.img && (
             <Image
               src={dogData.img}
@@ -95,7 +97,7 @@ const MatchResults = () => {
               mt: 2,
             }}
           >
-            <Button onClick={() => router.push("/search")} size="large">
+            <Button onClick={() => router.push(SEARCH_PAGE)} size="large">
               Start Over
             </Button>
             <LogoutButton />

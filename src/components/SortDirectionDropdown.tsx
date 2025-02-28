@@ -6,7 +6,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import React from "react";
 
 type BreedSortProps = {
-  sortDirection: SortDirectionOptions; 
+  sortDirection: SortDirectionOptions;
   onSortChange: (event: SelectChangeEvent) => void;
 };
 
@@ -23,6 +23,8 @@ const BreedSort: React.FC<BreedSortProps> = ({
         value={sortDirection}
         label="Sort"
         onChange={onSortChange}
+        aria-labelledby="sort-direction-label"
+        aria-description="Select sort order"
       >
         <MenuItem value="asc">Ascending</MenuItem>
         <MenuItem value="desc">Descending</MenuItem>

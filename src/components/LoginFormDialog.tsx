@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import CircularProgress from "@mui/material/CircularProgress";
 import ErrorMessage from "./ErrorMessage";
 import useUserAuth from "@/hooks/useUserAuth";
+import { SEARCH_PAGE } from "@/utils/config";
 
 const LoginFormDialog = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -38,7 +39,7 @@ const LoginFormDialog = () => {
   useEffect(() => {
     if (isAuthenticated && !error) {
       handleModalClose();
-      push("/search");
+      push(SEARCH_PAGE);
     } else if (error)
       setErrorMessage("Authentication failed. Please try again.");
   }, [isAuthenticated, error, push]);

@@ -30,7 +30,6 @@ const SelectBreeds = ({
   selectedBreeds,
   onBreedSelect,
 }: SelectBreedsProps) => {
-
   const handleBreedSelection = (
     event: SelectChangeEvent<typeof selectedBreeds>
   ) => {
@@ -48,45 +47,45 @@ const SelectBreeds = ({
   };
 
   return (
-      <FormControl sx={{ width: 275 }}>
-        <InputLabel id="select-breed-label">Select Breeds</InputLabel>
-        <Select
-          labelId="select-breed-label"
-          id="select-breed"
-          multiple
-          value={selectedBreeds}
-          onChange={handleBreedSelection}
-          input={
-            <OutlinedInput id="breed-selection" label="breed-selection-chip" />
-          }
-          renderValue={(selected) => (
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} />
-              ))}
-            </Box>
-          )}
-          MenuProps={MenuProps}
-          sx={{ mb: 1}}
-        >
-          {allBreeds && allBreeds.map((breed: string) => (
-            <MenuItem
-              key={`dog-breed-${breed}`}
-              value={breed}
-            >
+    <FormControl sx={{ width: 275 }}>
+      <InputLabel id="select-breed-label">Select Breeds</InputLabel>
+      <Select
+        labelId="select-breed-label"
+        id="select-breed"
+        multiple
+        value={selectedBreeds}
+        onChange={handleBreedSelection}
+        input={
+          <OutlinedInput id="breed-selection" label="breed-selection-chip" />
+        }
+        renderValue={(selected) => (
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+            {selected.map((value) => (
+              <Chip key={value} label={value} />
+            ))}
+          </Box>
+        )}
+        MenuProps={MenuProps}
+        sx={{ mb: 1 }}
+        aria-labelledby="select-breed-label"
+        aria-description="Select dog breeds"
+      >
+        {allBreeds &&
+          allBreeds.map((breed: string) => (
+            <MenuItem key={`dog-breed-${breed}`} value={breed}>
               {breed}
             </MenuItem>
           ))}
-        </Select>
-        <Button
-          variant="outlined"
-          onClick={handleBreedReset}
-          disabled={!selectedBreeds.length}
-          sx={{ width: '80%', margin: 'auto'}}
-        >
-          Reset Breeds
-        </Button>
-      </FormControl>
+      </Select>
+      <Button
+        variant="outlined"
+        onClick={handleBreedReset}
+        disabled={!selectedBreeds.length}
+        sx={{ width: "80%", margin: "auto" }}
+      >
+        Reset Breeds
+      </Button>
+    </FormControl>
   );
 };
 

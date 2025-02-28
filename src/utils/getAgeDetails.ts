@@ -15,9 +15,13 @@ export const getAgeRanges = (
 
 export const getAgeGroupFromAge = (age: number): AgeGroup | undefined => {
   switch (true) {
-    case age <= 2: return "puppy";
-    case age <= 9: return "adult";
-    case age <= 25: return "senior";
-    default: return undefined;
+    case age <= 2:
+      return "puppy";
+    case age <= 9:
+      return "adult";
+    case age <= 25:
+      return "senior";
+    default:
+      return undefined;
   }
 };

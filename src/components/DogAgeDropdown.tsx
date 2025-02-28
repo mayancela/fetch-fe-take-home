@@ -24,6 +24,8 @@ const AgeSelect: React.FC<AgeSelectProps> = ({
           value={ageSelected}
           label="Age"
           onChange={onAgeSelectedChange}
+          aria-labelledby="age-select-label"
+          aria-description="Select dog age group"
         >
           <MenuItem value="all">All</MenuItem>
           <MenuItem value="puppy">Puppy</MenuItem>
