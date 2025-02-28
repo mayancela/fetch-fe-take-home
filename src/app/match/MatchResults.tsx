@@ -97,7 +97,11 @@ const MatchResults = () => {
               mt: 2,
             }}
           >
-            <Button onClick={() => router.push(SEARCH_PAGE)} size="large">
+            <Button
+              onClick={() => router.push(SEARCH_PAGE)}
+              size="large"
+              aria-label="Restart search"
+            >
               Start Over
             </Button>
             <LogoutButton />

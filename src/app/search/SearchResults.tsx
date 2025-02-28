@@ -10,7 +10,7 @@ import { HOME_PAGE, LARGE_GAP, RESULTS_SIZE } from "@/utils/config";
 import Container from "@mui/material/Container";
 import { CircularProgress } from "@mui/material";
 import SelectBreeds from "@/components/DogBreedsDropdown";
-import BreedSort from "@/components/SortDirectionDropdown";
+import DogBreedsDropdown from "@/components/SortDirectionDropdown";
 import AgeSelect from "@/components/DogAgeDropdown";
 import DetailsGrid from "@/components/DetailsGrid";
 import { AgeGroup, SortDirectionOptions, SortOptions } from "@/utils/types";
@@ -172,7 +172,7 @@ const SearchResults = () => {
                 searchFilters={sortOption}
                 onFilterChange={handleSortOption}
               />
-              <BreedSort
+              <DogBreedsDropdown
                 sortDirection={sortDirection}
                 onSortChange={handleSortChange}
               />
@@ -220,6 +220,7 @@ const SearchResults = () => {
                   onClick={handlePrev}
                   disabled={currentPage === 1}
                   size="small"
+                  aria-label="prvious page"
                 >
                   Prev
                 </Button>
@@ -234,6 +235,7 @@ const SearchResults = () => {
                     currentPage === Math.ceil(totalResults / RESULTS_SIZE)
                   }
                   size="small"
+                  aria-label="next page"
                 >
                   Next
                 </Button>

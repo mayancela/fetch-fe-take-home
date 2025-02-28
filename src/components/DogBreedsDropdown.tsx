@@ -19,17 +19,17 @@ const MenuProps = {
   },
 };
 
-type SelectBreedsProps = {
+type DogBreedsDropdownProps = {
   allBreeds: string[];
   selectedBreeds: string[];
   onBreedSelect: (selectedBreeds: string[]) => void;
 };
 
-const SelectBreeds = ({
+const DogBreedsDropdown = ({
   allBreeds,
   selectedBreeds,
   onBreedSelect,
-}: SelectBreedsProps) => {
+}: DogBreedsDropdownProps) => {
   const handleBreedSelection = (
     event: SelectChangeEvent<typeof selectedBreeds>
   ) => {
@@ -82,6 +82,7 @@ const SelectBreeds = ({
         onClick={handleBreedReset}
         disabled={!selectedBreeds.length}
         sx={{ width: "80%", margin: "auto" }}
+        aria-label="dog breed option dropdown"
       >
         Reset Breeds
       </Button>
@@ -89,4 +90,4 @@ const SelectBreeds = ({
   );
 };
 
-export default SelectBreeds;
+export default DogBreedsDropdown;
